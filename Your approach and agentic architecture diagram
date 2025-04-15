@@ -1,0 +1,36 @@
+[User Interface] 
+       ↓
+[Input Processor] → (City, Budget, Days, Interests)
+       ↓
+[Orchestration Agent] → Coordinates all subsystems
+       |
+       ├── [Photo Fetcher Agent] → Pixabay API
+       ├── [Research Agent] → Wikivoyage/OpenTripMap 
+       ├── [Recommendation Agent] → Local Knowledge Base
+       ├── [Budget Planner Agent] → Cost Optimizer
+       └── [Itinerary Generator Agent] → Markdown Builder
+       ↓
+[Output Renderer] → Gradio UI
+
+class PhotoFetcher:
+    def get_photos(city): 
+        # Calls Pixabay API with city-specific queries
+        # Implements cache with TTL
+
+class RecommendationEngine:
+    def get_local_tips(city, interest):
+        # Hybrid approach: Pre-defined DB + dynamic web search
+        # Personalizes based on budget tier
+
+class BudgetPlanner:
+    def allocate_funds(budget, days):
+        # Generates daily spending caps
+        # Suggests luxury/mid-range/budget options
+sequenceDiagram
+    User->>+Orchestrator: Submit Paris, $3000, 5 days
+    Orchestrator->>+PhotoFetcher: Get Paris photos
+    Orchestrator->>+ResearchAgent: Fetch city summary
+    Orchestrator->>+RecommendationAgent: Get food/culture tips
+    Orchestrator->>BudgetPlanner: Allocate $600/day
+    Orchestrator->>ItineraryBuilder: Generate markdown
+    ItineraryBuilder-->>-User: Detailed plan + photos
